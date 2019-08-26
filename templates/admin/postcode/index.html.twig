@@ -1,0 +1,68 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Administration des codes postaux' %}
+
+{% block body %}
+    <div class="container">
+        <div class="text-center">
+            <h1 class="my-5">Administration des codes postaux</h1>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Code postal</th>
+                    <th>Ville</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for postcode in paginator.data %}
+                    <tr>
+                        <td>{{ postcode.id }}</td>
+                        <td>{{ postcode.code }}</td>
+                        <td>{{ postcode.city.name }}</td>
+                        <td>
+                            <a href="{{ path('admin_postcode_edit', {'id': postcode.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_postcode_delete', {'id': postcode.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {{ paginator.display() }}
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#exampleModalCenter">
+            Ajouter un code postal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content mb-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un code postal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {{ form_start(form) }}
+                    <div class="modal-body">
+                        {{ form_widget(form) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Ajouter un code postal</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+{% endblock %}

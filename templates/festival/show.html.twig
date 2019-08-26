@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ festival.title }}{% endblock %}
+
+{% block body %}
+
+<div class="festival-title" style="background-image: url({{ festival.coverImage }})" >
+    <div class="container py-3">
+        <h1>{{ festival.title }}</h1>
+
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mb-3">
+            {% if festival.events | length > 0 %}
+                <div class="title">
+                    <h2>Les {{festival.events | length}} évènements à venir</h2>
+                    <div class="buttons">
+                        <button class="list-view on"><i class="fa fa-bars"></i></button>
+                        <button class="grid-view"><i class="fa fa-th"></i></button>
+                    </div>
+                </div>
+                <div class="wrapper list">
+                    {% for event in festival.events %}
+                        {% include 'event/_event.html.twig '%}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>
+                        <strong>{{festival.title}}</strong> n'a pas encore d'évènement associé !
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ festival.description | raw }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

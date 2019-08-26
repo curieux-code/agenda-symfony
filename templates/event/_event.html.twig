@@ -1,0 +1,100 @@
+
+{% set url = path('event_show',{'slug': event.slug }) %}
+
+<div class="item">
+
+    <div class="block-visual">
+
+        <div class="block-badge">
+            <a href="#">{{ event.rubric.name | badge({'color':'danger'}) }}</a>
+            {% for category in event.category %}
+                <a href="#">{{ category.name | badge }}</a> 
+            {% endfor %}
+        </div>
+
+        <div class="block-image">
+            <a href="{{ url }}">
+
+                <div class="img-blur">
+                    <img src="{{ event.coverImage }}" />
+                </div>
+
+                <div class="img-contain">
+                    <img src="{{ event.coverImage }}" />
+                </div>
+
+            </a>
+        </div>
+
+    </div>
+
+    <div class="details">
+        
+        <div class="block-date">
+            {% include 'event/__date.html.twig' %}
+        </div>
+
+        <a href="{{ url }}">
+            <h4>{{ event.title }}</h4>
+        </a>
+
+        <div class="block-detail">
+
+            <div class="button-detail" href="{{ url }}">
+                <i class="fa fa-map-marker fa-lg"></i>
+                {% if event.place %}
+                    <a href="{{ path('place_show',{'slug': event.place.slug }) }}">{{ event.place.title }}</a>,
+                    <a href="#">{{ event.place.city.name }}</a>
+                {% else %}
+                    {{ event.placeTemporary }},
+                    <a href="#">{{ event.city.name }}</a>
+                {% endif %}
+            </div>
+
+            <div class="button-detail">
+                {% include 'event/__price.html.twig' %}
+            </div>  
+
+            {% for price in event.prices %}
+                {% if price.reduction.slug == directory %}
+                    <div class="button-detail">
+                        <i class="fa fa-gift fa-lg"></i>
+                        <a href="">{{ price.price }} € avec {{ price.reduction.title }}</a>
+                    </div>
+                {% endif %} 
+            {% endfor %}
+
+            {% if event.festival %}
+                <div class="button-detail">
+                    <i class="fa fa-flag fa-lg"></i>
+                    <a href="{{ path('festival_show',{'slug': event.festival.slug }) }}">{{ event.festival.title }}</a>
+                </div>
+            {% endif %}
+
+        </div>
+
+        {#
+        <br>
+        Tarif : 
+        <span>
+            {% include 'event/__price.html.twig' %}
+        </span>
+
+        <p>
+        Lieu :
+            {% if event.place %}
+                <a href="{{ path('place_show',{'slug': event.place.slug }) }}">{{ event.place.title }}</a>,
+                <a href="#">{{ event.place.city.name }}</a>
+            {% else %}
+                {{ event.placeTemporary }},
+                <a href="#">{{ event.city.name }}</a>
+            {% endif %}
+        </p>
+        
+        {% if event.festival %}
+            Festival : <a href="{{ path('festival_show',{'slug': event.festival.slug }) }}">{{ event.festival.title }}</a>
+        {% endif %}
+        #}
+    </div>
+
+</div>

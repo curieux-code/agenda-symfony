@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Administration des festivals' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5 text-center">Administration des festivals</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Nombre d'évènement</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for festival in paginator.data %}
+                    <tr>
+                        <td>{{festival.id}}</td>
+                        <td>{{festival.title}}</td>
+                        <td>{{festival.events | length}}</td>
+                        <td><img height='50px' src='{{festival.coverImage}}'/></td>
+                        <td>{{festival.description}}</td>
+                        <td>
+                            <a href="{{ path('admin_festival_edit', {'id': festival.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_festival_delete', {'id': festival.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {{ paginator.display() }}
+    </div>
+{% endblock %}

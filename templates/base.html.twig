@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Curieux.net - {% block title %}Agenda participatif{% endblock %}</title>
+
+        {#
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        #}
+
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.css">
+        {% block stylesheets %}
+        
+        {% endblock %}
+    </head>
+    <body>
+
+        {% include 'partials/header.html.twig' %}
+        {#{% block header %}{% endblock %}#}
+
+        {% block body %}{% endblock %}
+
+        {% include 'partials/footer.html.twig' %}
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+
+        {# Ne fonctionne pas !!!!
+        <script src="{{ asset('build/js/app.js') }}"></script>
+        #}
+
+        {% block javascripts %}{% endblock %}
+
+            <script type="text/javascript">
+                listButton = $('button.list-view');
+                gridButton = $('button.grid-view');
+                wrapper = $('div.wrapper');
+
+                listButton.on('click',function(){  
+                    gridButton.removeClass('on');
+                    listButton.addClass('on');
+                    wrapper.removeClass('grid').addClass('list');
+                });
+
+                gridButton.on('click',function(){
+                    listButton.removeClass('on');
+                    gridButton.addClass('on');
+                    wrapper.removeClass('list').addClass('grid');
+                });
+
+                
+                function sizing() {
+                    $('.item .block-visual .block-image .img-contain img').each(function() {
+
+                        var $current =  $(this),
+                            width = $current.width(),
+                            max_w = $('.img-contain').width();
+                            
+                        if (width <= max_w) {
+                            $current.css({ 'height':'90%','width': 'initial'});
+                        }
+                        else {
+                            $current.css({ 'height':'initial','width': '90%'});
+                        }
+
+                    });
+
+                }
+
+                window.onload=function(){
+                    sizing()
+                }
+                $(window).resize(sizing);
+
+
+
+
+
+                /* Menu lateral fixe
+                var fixed = false;
+                var topTrigger = $('#pubLateral').offset().top;
+                $(document).scroll(function() {
+                    if( $(this).scrollTop() >= topTrigger ) {
+                        if( !fixed ) {
+                            fixed = true;
+                            $('#pubLateral').css({'position':'fixed', 'top':'0'});
+                        }
+                    } else {
+                        if( fixed ) {
+                            fixed = false;
+                            $('#pubLateral').css({'position':'relative'});
+                        }
+                    }
+                });
+                */
+            </script>
+
+    </body>
+</html>

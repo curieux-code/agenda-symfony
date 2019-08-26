@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des lieux{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5 text-center">Administration des lieux</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Adresse</th>
+                    <th>Ville</th>
+                    <th>Quartier</th>
+                    <th>GPS</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for place in places %}
+                    <tr>
+                        <td>{{place.id}}</td>
+                        <td>{{place.title}}</td>
+                        <td>{{place.number}} {{place.address}}</td>
+                        <td>{{place.city.name}}</td>
+                        <td>
+                            {% if place.district %}
+                                {{place.district.name}}
+                            {% else %}
+                                X
+                            {% endif %}
+                        </td>
+                        <td>{{place.longitude}},{{place.latitude}}</td>
+                        <td>
+                            <a href="{#{ path('admin_place_edit', {'id': place.id}) }#}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{#{ path('admin_place_delete', {'id': place.id}) }#}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

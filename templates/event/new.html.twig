@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une annonce{% endblock %}
+
+{% form_theme form 'event/_collection.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="my-4">Annoncer un évènement</h1>
+
+        {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <button type="submit" class="btn btn-primary">Créer la nouvelle annonce</button>
+
+        {{ form_end(form) }}
+            
+    </div>
+    
+{% endblock %}
+
+
+{% block javascripts %}
+
+
+<script src="/js/event.js"></script>
+
+{% endblock %}
+
+{# 
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
+<script src="/js/autocompleter-select2.js"></script>    
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/autocompleter-jqueryui.js"></script>
+
+1er solution :
+    {{ form(form) }}
+    
+2eme solution
+{{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Titre de l\'annonce'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description de l\'annonce'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.slug) }}
+        {{ form_widget(form.slug, {'attr': {'class': 'form-control', 'placeholder': 'Slug de l\'annonce'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Prix de l\'annonce'}}) }}
+    </div>
+
+{{ form_end(form) }}
+
+
+    3eme solution :
+    
+
+
+{{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary">Créer la nouvelle annonce</button>
+
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block form_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block text_widget %}
+    <input type="text" name="" id="" class="form-control">
+{% endblock %}
+
+{% block url_widget %}
+{% endblock %}
+
+{% block textarea_widget %}
+{% endblock %}
+
+#}
+
+

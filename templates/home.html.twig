@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Le site qui déchire
+{% endblock %}
+
+
+{% block body %}
+
+<div class="aboveVideo">
+  <!-- Optional attributes, remove the features you don't want.
+  Add the "controls" attribute to get the video player buttons 
+  <span>
+  trop stylé
+  </span>-->
+  <video autoplay loop muted>
+    <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4" type="video/mp4" />
+  </video>
+</div>
+
+lorem50
+<div class="container">
+    <div class="jumbotron mt-3">
+        <h1 class="display-3">Bienvenue sur {{ website }}</h1>
+        <p class="lead">Le meilleur site pour vos sorties.</p>
+        <hr class="my-4">
+        <p>Vous allez kiffé.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Voir plus</a>
+        </p>
+    </div>
+
+    <h2 class="h1 mt-3 mb-4">Nos évènements au top :</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-light md-3">
+                <div class="card-header text-center">
+                    3 chambres <b>45 € par nuit</b><br>
+                    <small>Pas encore noté</small>
+                </div>
+                <img src="http://placehold.it/1000x400" alt="Image" style="height:200px; width:100%; display:block">
+
+                <div class="card-body">
+                    <h4>Yo ca roule</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque commodi sunt deserunt tempora a nobis animi ducimus laudantium quam natus.</p>
+                    <a href="#" class="btn btn-primary">Plus d'info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light md-3">
+                <div class="card-header text-center">
+                    3 chambres <b>45 € par nuit</b><br>
+                    <small>Pas encore noté</small>
+                </div>
+                <img src="http://placehold.it/1000x400" alt="Image" style="height:200px; width:100%; display:block">
+
+                <div class="card-body">
+                    <h4>Yo ca roule</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque commodi sunt deserunt tempora a nobis animi ducimus laudantium quam natus.</p>
+                    <a href="#" class="btn btn-primary">Plus d'info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light md-3">
+                <div class="card-header text-center">
+                    3 chambres <b>45 € par nuit</b><br>
+                    <small>Pas encore noté</small>
+                </div>
+                <img src="http://placehold.it/1000x400" alt="Image" style="height:200px; width:100%; display:block">
+
+                <div class="card-body">
+                    <h4>Yo ca roule</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque commodi sunt deserunt tempora a nobis animi ducimus laudantium quam natus.</p>
+                    <a href="#" class="btn btn-primary">Plus d'info</a>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <h2 class="h1 mt-3 mb-4">Nos lieux préférées :</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-secondary mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">La Laiterie</h4>
+                    <hr>
+                    <div class="card-text">
+                        <img src="http://placehold.it/64x64" alt="Avatar" class="float-left mr-3">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, magni!</p>
+                        <a >En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-secondary mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">Le Molodoï</h4>
+                    <hr>
+                    <div class="card-text">
+                        <img src="http://placehold.it/64x64" alt="Avatar" class="float-left mr-3">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, magni!</p>
+                        <a >En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{#Bonjour {{ title | upper }}
+<br>
+Taille du sexe : {{ taille }} cm
+
+<a href="{{ path('hello', {'prenom' : 'Johnny', 'taille' : 30}) }}" >Lien test</a>
+
+<br>Vous avez une 
+{%  if taille <= 5 %}
+    petite
+{% elseif taille <=7 %}
+    moyenne
+{% else %}
+    grosse
+{% endif %}
+ bite
+
+
+<br><br>
+{% for i in 0..10 %}
+    - {{ i }}<br>
+{% endfor %}
+
+
+<br><br>
+ {% for godmichet, taille in tableau %}
+    {%  if loop.first %}
+        - <b>Le {{ godmichet }} fait {{ taille }} cm</b><br>
+    {% else %}
+        - Le {{ godmichet }} fait {{ taille }} cm<br>
+    {% endif %}
+
+ {% endfor %}
+#}
+{% endblock %}

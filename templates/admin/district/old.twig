@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Administration des quartiers' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-5 text-center">Administration des quartiers</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Quartier</th>
+                    <th>Ville</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for district in paginator.data %}
+                    <tr>
+                        <td>{{district.id}}</td>
+                        <td>{{district.name}}</td>
+                        <td>{{district.city.name}}</td>
+                        <td>
+                            <a href="#{#{ path('admin_district_edit', {'id': district.id}) }#}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="#{#{ path('admin_district_delete', {'id': district.id}) }#}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {{ paginator.display() }}
+    </div>
+{% endblock %}

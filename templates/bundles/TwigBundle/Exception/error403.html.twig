@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès refusé ! Vous ne pouvez pas accéder à cette page{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1 class="h1 mt-10 mb-10">Accès refusé ! <br>Vous ne pouvez pas accéder à cette page</h1>
+    <p>Connectez-vous au compte correspondant ou demander les droits</p>
+    <a href="{{ path('homepage') }}" class="btn btn-primary">Revenir à l'accueil</a>
+    <a href="{{ path('event_index') }}" class="btn btn-success">Demander les droits d'accès</a>
+
+</div>
+
+{% endblock %}

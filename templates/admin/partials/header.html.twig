@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('homepage') }}" target="_blank">Curieux.net</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path("admin_dashboard") }}">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="eventDropdownLink" href="{{ path("admin_event_index") }}">
+                    <i class="fas fa-eye"></i>
+                    Agenda
+                </a>
+                <div class="dropdown-menu dropdown-menu" aria-labelledby="eventDropdownLink">
+                    <a class="dropdown-item" href="{{ path("admin_event_index") }}">Les évènements</a>
+                    <a class="dropdown-item" href="{{ path("admin_rubric_index") }}">Les rubriques</a>
+                    <a class="dropdown-item" href="{{ path("admin_category_index") }}">Les catégories</a>
+                    <a class="dropdown-item" href="{{ path("admin_festival_index") }}">Les festivals</a>
+                    <a class="dropdown-item" href="{{ path("admin_reduction_index") }}">Les réductions</a>
+                    <a class="dropdown-item" href="{{ path("admin_ticketing_index") }}">Les billetteries</a>
+                    <a class="dropdown-item" href="{{ path("admin_videostore_index") }}">Les vidéothèques</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="placeDropdownLink" href="{{ path("admin_place_index") }}">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Annuaire
+                </a>
+                <div class="dropdown-menu dropdown-menu" aria-labelledby="placeDropdownLink">
+                    <a class="dropdown-item" href="{{ path("admin_place_index") }}">Les lieux</a>
+                    <a class="dropdown-item" href="{{ path("admin_placetype_index") }}">Les types de lieux</a>
+                    <a class="dropdown-item" href="{{ path("admin_district_index") }}">Les quartiers</a>
+                    <a class="dropdown-item" href="{{ path("admin_city_index") }}">Les villes</a>
+                    <a class="dropdown-item" href="{{ path("admin_postcode_index") }}">Les codes postaux</a>
+                    <a class="dropdown-item" href="{{ path("admin_borough_index") }}">Les arrondissements</a>
+                    <a class="dropdown-item" href="{{ path("admin_department_index") }}">Les départements</a>
+                    <a class="dropdown-item" href="{{ path("admin_region_index") }}">Les régions</a>
+                    <a class="dropdown-item" href="{{ path("admin_country_index") }}">Les pays</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path("admin_user_index") }}">
+                    <i class="fas fa-user"></i>
+                    Utilisateurs
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('admin_comment_index') }}">
+                    <i class="fas fa-comment"></i>
+                    Commentaires
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
+                    <img src="{{ app.user.avatar}}" class="avatar avatar-mini" alt="Avatar de {{ app.user.fullName }} ">
+                    {{ app.user.fullName }}
+                </a>
+                
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                    <a class="dropdown-item" href="{{ path('admin_account_logout') }}">Déconnexion</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+{% for label, messages in app.flashes %}
+    <div class="container">
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message | raw }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

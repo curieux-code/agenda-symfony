@@ -1,0 +1,23 @@
+{% set url = path('festival_show',{'slug': festival.slug }) %}
+
+<div class="col-md-4">
+    <div class="card bg-light mb-3">
+        <a href="{{ url }}">
+            <img src="{{ festival.coverImage }}" alt="Image" style="height:200px; width:100%; display:block">
+        </a>
+        <div class="card-body">
+            <h4>
+                <a href="{{ url }}">
+                    {{ festival.title }}
+                </a>
+            </h4>
+            <h5>
+                {% if festival.events | length > 0 %}
+                    {{festival.events | length}} évènements à venir
+                {% endif %}
+            </h5>
+            <a href="{{ url }}" class="btn btn-primary">Plus d'info</a>
+
+        </div>
+    </div>
+</div>

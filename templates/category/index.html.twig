@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+
+<div class="main">
+
+    <div class="nav-side-menu">
+        {% include 'event/_menu.html.twig '%}
+    </div>
+
+    <div class="page">
+
+        {% if category.events | length > 0 %}
+            <div class="title">
+                <h2>Dans la catégorie "{{ category.name }}"</h2>
+                {% include 'partials/choiceView.html.twig '%}
+            </div>
+            <div class="wrapper list">
+                {% for event in category.events %}
+                    {% include 'event/_event.html.twig '%}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                <p>
+                    La catégorie <strong>{{category.name}}</strong> n'a pas d'évènement à venir sur le site !
+                </p>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+

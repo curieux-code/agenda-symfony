@@ -1,0 +1,74 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Administration des annonces' %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <h1 class="my-5 text-center">Administration des annonces</h1>
+        <table class="table table-hover">
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Tarif</th>
+                    <th>Auteur</th>
+                    <th>Participant</th>
+                    <th>Note</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for event in paginator.data %}
+                    <tr>
+                        <td>{{event.id}}</td>
+                        <td>{{event.title}}</td>
+                        <td>
+                            {% if event.dateStart == event.dateEnd %}
+                                Le {{ event.dateStart|date('d/m/Y') }}
+                            {% else %}
+                                Du {{ event.dateStart|date('d/m/Y') }}
+                                au {{ event.dateEnd|date('d/m/Y') }}
+                            {% endif %}
+
+                            {% if event.timeEnd %}
+                                de {{ event.timeStart|date('H:i') }} à {{ event.timeEnd|date('H:i') }}<br>
+                            {% elseif event.timeStart %}
+                                à partir de {{ event.timeStart|date('H:i') }}<br>
+                            {% endif %}
+                        <td>
+                            {% if event.place %}
+                                {{ event.place.title }}, {{ event.place.city.name }}
+                            {% else %}
+                                {{ event.placeTemporary }}, {{ event.city.name }}
+                            {% endif %}
+                        </td>
+                        <td>{{event.price}}
+                            {% if event.prices %}
+                                {% for price in event.prices %}
+                                    <br>{{ price.reduction.title }} : {{ price.price }}
+                                {% endfor %}
+                            {% endif %}
+                        
+                        </td>
+                        <td>{#{event.author.fullName}#}</td>
+                        <td><span class="badge badge-primary rounded text-center">X</span></td>
+                        <td><span class="badge badge-primary rounded text-center">X</span></td>
+                        <td>
+                            <a href="{{ path('admin_event_edit', {'id': event.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_event_delete', {'id': event.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        {{ paginator.display() }}
+        {#% include 'admin/partials/paginator.html.twig' with {'route':'admin_event_index'}%#}
+    </div>
+
+{% endblock %}

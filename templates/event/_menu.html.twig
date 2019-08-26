@@ -1,0 +1,170 @@
+<div class="brand">Recherche avancée</div>
+<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+<div class="menu-list">
+    <ul id="menu-content" class="menu-content collapse out">
+
+        <li data-toggle="collapse" data-target="#products" {% if 'MENU_WEEK' not in menu %} class="collapsed" {% endif %} >
+            <a><i class="fa fa-calendar fa-lg"></i> Cette semaine <span class="arrow"></span></a>
+        </li>
+
+        <ul class="sub-menu collapse {% if 'MENU_WEEK' in menu %}show{% endif %}" id="products">
+            <li {% if directory == "0" %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "aujourd-hui"}) }}">
+                    Aujourd'hui, {{ daysOfWeek[0] }}
+                    <span class="badge">{{ countByDay[0]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 1 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "demain"}) }}">
+                    Demain, {{ daysOfWeek[1] }}
+                    <span class="badge">{{ countByDay[1]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 2 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "apres-demain"}) }}">
+                    {{ daysOfWeek[2]|capitalize }}
+                    <span class="badge">{{ countByDay[2]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 3 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "dans-3-jours"}) }}">
+                    {{ daysOfWeek[3]|capitalize }}
+                    <span class="badge">{{ countByDay[3]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 4 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "dans-4-jours"}) }}">
+                    {{ daysOfWeek[4]|capitalize }}
+                    <span class="badge">{{ countByDay[4]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 5 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "dans-5-jours"}) }}">
+                    {{ daysOfWeek[5]|capitalize }}
+                    <span class="badge">{{ countByDay[5]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 6 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "dans-6-jours"}) }}">
+                    {{ daysOfWeek[6]|capitalize }}
+                    <span class="badge">{{ countByDay[6]['count'] }}</span>
+                </a>
+            </li>
+            <li {% if directory == 7 %} class="active" {% endif %} >
+                <a href="{{ path('event_by_day', {'txtDay': "dans-7-jours"}) }}">
+                    {{ daysOfWeek[7]|capitalize }} prochain
+                    <span class="badge">{{ countByDay[7]['count'] }}</span>
+                </a>
+            </li>
+        </ul>
+
+
+        <li data-toggle="collapse" data-target="#service" class="{% if 'MENU_RUBRIC' not in menu %}collapsed{% endif %}">
+            <a><i class="fa fa-music fa-lg"></i> Les rubriques <span class="arrow"></span></a>
+        </li>
+
+        <ul class="sub-menu collapse {% if 'MENU_RUBRIC' in menu %}show{% endif %}" id="service">
+            {% for rubric in rubrics %}
+                
+                <li {% if directory == rubric.slug and directory %} class="active" {% endif %}>
+                    <a href="{{ path('search_by_rubric', {'slug': rubric.slug }) }}">
+                        {{ rubric.name }}
+                        <span class="badge">{{ rubric.events | length }}</span>
+                    </a>
+                </li>
+                
+            {% endfor %}
+        </ul>
+
+        <li data-toggle="collapse" data-target="#category" class="{% if 'MENU_CATEGORY' not in menu %}collapsed{% endif %}">
+            <a><i class="fa fa-crosshairs fa-lg"></i> Les catégories <span class="arrow"></span></a>
+        </li>
+
+        <ul class="sub-menu collapse {% if 'MENU_CATEGORY' in menu %}show{% endif %}" id="category">
+            {% for category in categorys %}
+
+                {% if category.events | length %}
+                    <li {% if directory == category.slug and directory %} class="active" {% endif %}>
+                        <a href="{{ path('search_by_category', {'slug': category.slug }) }}">
+                            {{ category.name }}
+                            <span class="badge">{{ category.events | length }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+
+        <li data-toggle="collapse" data-target="#reduction" class="{% if 'MENU_REDUCTION' not in menu %}collapsed{% endif %}">
+            <a><i class="fa fa-gift fa-lg"></i> Les réductions <span class="arrow"></span></a>
+        </li>
+
+        <ul class="sub-menu collapse {% if 'MENU_REDUCTION' in menu %}show{% endif %}" id="reduction">
+            {% for reduction in reductions %}
+                
+                <li {% if directory == reduction.slug and directory %} class="active" {% endif %}>
+                    <a href="{{ path('search_by_reduction', {'slug': reduction.slug }) }}">
+                        {{ reduction.title }}
+                        <span class="badge">{{ reduction.prices | length }}</span>
+                    </a>
+                </li>
+                
+            {% endfor %}
+        </ul>
+
+        {#
+        <li data-toggle="collapse" data-target="#place" class="{% if 'MENU_PLACE' not in menu %}collapsed{% endif %}">
+            <a><i class="fa fa-map-marker fa-lg"></i> Lieux <span class="arrow"></span></a>
+        </li>
+
+        <ul class="sub-menu collapse {% if 'MENU_PLACE' in menu %}show{% endif %}" id="place">
+            <li>New New 1</li>
+            <li>New New 2</li>
+            <li>New New 3</li>
+        </ul>
+
+
+        <li>
+            <a href="#">
+            <i class="fa fa-user fa-lg"></i> Profil
+            </a>
+        </li>
+#}
+        
+
+
+
+        <li data-toggle="collapse" data-target="#search" class="{% if 'MENU_SEARCH' not in menu %}collapsed{% endif %}">
+            <a><i class="fa fa-gift fa-lg"></i> Recherche avancée <span class="arrow"></span></a>
+        </li>
+
+        <ul class="sub-menu collapse {% if 'MENU_SEARCH' in menu %}show{% endif %}" id="search">
+            <li>
+                <div class="menu-search">
+                    {{ form_start(form) }}
+                        {{ form_row(form.maxPrice) }}
+                        <button class="btn btn-primary">Rechercher</button>
+                    {{ form_end(form) }}
+                </div>
+               
+            </li>
+        </ul>
+
+
+        <li class="active">
+            <a href="{{ path('event_create') }}">
+            <i class="fa fa-download fa-lg"></i> Annoncer un évènement
+            </a>
+        </li>
+
+
+    </ul>
+
+<div id="pubLateral">
+	<iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/strasbourg.curieux&amp;width=250&amp;height=600&amp;tabs=timeline,messages&amp;colorscheme=dark" width="250" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+	</div>
+
+
+
+</div>

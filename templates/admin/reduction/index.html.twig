@@ -1,0 +1,125 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Administration des réductions' %}
+
+{% form_theme form _self %}
+
+{% block body %}
+    <div class="container">
+        <div class="text-center">
+            <h1 class="mt-5">Administration des réductions</h1>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Arrondissement</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reduction in paginator.data %}
+                    <tr>
+                        <td>{{reduction.id}}</td>
+                        <td>{{reduction.title}}</td>
+                        <td>
+                            {% if reduction.boroughs %}
+                                {% for borough in reduction.boroughs %}
+                                    - {{borough.name}}<br>
+                                {% endfor %}
+                            {% endif %}
+
+                        <td>
+                            <a href="{{ path('admin_reduction_edit', {'id': reduction.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_reduction_delete', {'id': reduction.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {{ paginator.display() }}
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#exampleModalCenter">
+    Ajouter une réduction
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content mb-5">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter une réduction</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {{ form_start(form) }}
+        <div class="modal-body">
+            {{ form_widget(form) }}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">Ajouter une réduction</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+
+        
+
+    </div>
+{% endblock %}
+
+
+{% block _reduction_boroughs_widget %}
+
+    Ici, nous pouvons associer des arrondissements
+    {{ form_widget(form) }}
+        
+    <input type="hidden" id="widgets-counter" value="0">
+
+    <div class="form-group">
+        <button type="button" id="add-borough" class="btn btn-primary">Ajouter un arrondissement</button>
+    </div>
+{% endblock %}
+
+{% block _reduction_boroughs_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _reduction_boroughs_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-10">
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function() {
+        $('[data-action="delete"]').on('click', function() {
+            //const target = $(this).data('target'); // Jquery
+            const target = this.dataset.target; // JS classique
+
+            //console.log(target);
+            $(target).remove();
+        })
+    });
+</script>
+
+<script src="/js/reduction.js"></script>
+
+{% endblock %}

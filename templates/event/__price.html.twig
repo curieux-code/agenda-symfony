@@ -1,0 +1,23 @@
+{% if event.price == 22 %}
+    <i class="fa fa-question-circle fa-lg"></i>
+    Tarif non communiqué
+{% elseif event.price == 21 %}
+    <i class="fa fa-credit-card fa-lg"></i>
+    Plus de 20 Euros
+{% elseif event.price == 0 %}
+    <i class="fa fa-thumbs-up fa-lg"></i>
+    Entrée libre
+{% elseif event.price == 0.01 %}
+    <i class="fa fa-thumbs-up fa-lg"></i>
+    Prix libre
+{% elseif event.price == 1 %}
+    <i class="fa fa-coins fa-lg"></i>
+    1 Euro
+{% else %}
+    {% if event.price > 10 %}
+        <i class="fa fa-credit-card fa-lg"></i>
+    {% else %}
+        <i class="fa fa-money fa-lg"></i>
+    {% endif %}
+    {{ event.price | number_format(2, ',') | replace({',00': '' }) }} Euros
+{% endif %}

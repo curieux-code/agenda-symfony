@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ rubric.name }}{% endblock %}
+
+{% block body %}
+
+<div class="main">
+
+    <div class="nav-side-menu">
+        {% include 'event/_menu.html.twig '%}
+    </div>
+
+    <div class="page">
+
+        {% if rubric.events | length > 0 %}
+            <div class="title">
+                <h2>{{ rubric.plural }} à venir</h2>
+                {% include 'partials/choiceView.html.twig '%}
+            </div>
+            <div class="wrapper list">
+                {% for event in rubric.events %}
+                    {% include 'event/_event.html.twig '%}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                <p>
+                    <strong>{{rubric.title}}</strong> n'a pas encore d'annonce sur le site !
+                </p>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,55 @@
+{% set url = path('place_show',{'slug': place.slug }) %}
+
+
+    <div class="item item-more-info">
+
+        <div class="block-visual">
+
+            <div class="block-badge">
+                {% for type in place.placetypes %}
+                    <a href="#">{{ type.name | badge({'color':'danger'}) }}</a> 
+                {% endfor %}
+            </div>
+
+            <div class="block-image">
+                <a href="{{ url }}">
+
+                    <div class="img-blur">
+                        <img src="{{ place.coverImage }}" />
+                    </div>
+
+                    <div class="img-contain">
+                        <img src="{{ place.coverImage }}" />
+                    </div>
+
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="details">
+            <h4>
+                <a href="{{ url }}">{{ place.title }}</a>,
+                <a class="city" href="#">{{ place.city.name }}</a>
+            </h4>
+            <h5>
+                {% if place.events | length > 1 %}
+                    {{place.events | length}} évènements à venir
+                {% elseif place.events | length > 0 %}
+                    {{place.events | length}} évènement à venir
+                {% else %}
+                    Aucun évènement à venir
+                {% endif %}
+            </h5>
+            <div class="info">
+                {% if place.district %}
+                    Quartier {{ place.district.name }}
+                 {% endif %}
+            </div>
+        </div>
+
+        <div class="more-info">
+            <a href="{{ url }}" class="btn btn-primary">Plus d'info</a>
+        </div>
+
+    </div>

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agenda culturel{% endblock %}
+
+{% block body %}
+
+<div class="main">
+
+    <div class="nav-side-menu">
+        {% include 'event/_menu.html.twig '%}
+    </div>
+
+    <div class="page">
+        <div class="title">
+            <h2>{{ texteDateSearch }}</h2>
+            {% include 'partials/choiceView.html.twig '%}
+        </div>
+        <div class="wrapper list">
+            {% for event in events %}
+                {% include 'event/_event.html.twig '%}
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+

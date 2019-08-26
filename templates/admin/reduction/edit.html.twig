@@ -1,0 +1,87 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title "Modification de la réduction" %}
+
+{% form_theme form _self %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="my-5 text-center"><u>Modification de la réduction :</u><br>"{{reduction.title}}"</h1>
+
+        {{ form_start(form) }}
+
+            <div class="row">
+                <div class="col">
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            <h4 class="card-title">Modification de la réduction</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check"></i>
+                                Enregister les modifications
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+
+{% block _reduction_boroughs_widget %}
+
+    Ici, nous pouvons associer des arrondissements
+    {{ form_widget(form) }}
+        
+    <input type="hidden" id="widgets-counter" value="0">
+
+    <div class="form-group">
+        <button type="button" id="add-borough" class="btn btn-primary">Ajouter un arrondissement</button>
+    </div>
+{% endblock %}
+
+{% block _reduction_boroughs_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _reduction_boroughs_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-10">
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function() {
+        $('[data-action="delete"]').on('click', function() {
+            //const target = $(this).data('target'); // Jquery
+            const target = this.dataset.target; // JS classique
+
+            //console.log(target);
+            $(target).remove();
+        })
+    });
+</script>
+
+<script src="/js/reduction.js"></script>
+
+{% endblock %}

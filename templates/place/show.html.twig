@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ place.title }}{% endblock %}
+
+{% block body %}
+
+<div class="place-title" style="background-image: url({{ place.coverImage }})" >
+    <div class="container py-3">
+        <h1>{{ place.title }}</h1>
+        <h3>{{ place.number }}, {{ place.address }}</h3>
+        <h4>{{ place.city.name }}</h4>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mb-3">
+
+            {% if place.events | length > 0 %}
+                <div class="title">
+                    <h2>Les {{place.events | length}} évènements à venir</h2>
+                    <div class="buttons">
+                        <button class="list-view on"><i class="fa fa-bars"></i></button>
+                        <button class="grid-view"><i class="fa fa-th"></i></button>
+                    </div>
+                </div>
+                <div class="wrapper list">
+                    {% for event in place.events %}
+                        {% include 'event/_event.html.twig '%}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>
+                        <strong>{{place.title}}</strong> n'a pas encore d'annonce sur le site !
+                    </p>
+                </div>
+            {% endif %}
+
+
+        </div>
+        <div class="col">
+
+            <p>Ville : {{ place.city.name }}</p>
+            {% if place.district %}
+                <p>Quartier : {{ place.district.name }}</p>
+            {% endif %}
+            <p>Arrondissement : {{ place.city.borough.name }}</p>
+            <p>Département : {{ place.city.borough.department.name }}</p>
+            <p>Région : {{ place.city.borough.department.region.name }}</p>
+            <p>Pays : {{ place.city.borough.department.region.country.name }}</p>
+            <br>
+            <div id="map" style="height:300px"></div>
+            <br>
+            {{ place.description | raw }}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+    // center of the map
+    var center = [{{ place.latitude }}, {{ place.longitude }}];
+
+    // Create the map
+    var map = L.map('map').setView(center, 3);
+
+    // Set up the OSM layer
+    L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18
+    }).addTo(map);
+
+    // add a marker in the given location
+    L.marker(center).addTo(map);
+    </script>
+
+
+{% endblock %}

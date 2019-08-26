@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire des festivals{% endblock %}
+
+{% block body %}
+
+<div class="main">
+
+
+
+
+
+    <div class="nav-side-menu">
+
+        {% include 'festival/_menu.html.twig '%}
+        
+    </div>
+
+    <div class="page">
+
+        <div class="title">
+            <h2>Les festivals</h2>
+            <div class="buttons">
+                <button class="list-view on"><i class="fa fa-bars"></i></button>
+                <button class="grid-view"><i class="fa fa-th"></i></button>
+            </div>
+        </div>
+        <div class="wrapper list">
+            {% for festival in festivals %}
+                {% include 'festival/_festival.html.twig '%}
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

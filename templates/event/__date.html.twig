@@ -1,0 +1,58 @@
+{% set week = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"] %}
+{% set month = ["décembre","janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"] %}
+
+{% if event.dateStart == event.dateEnd %}
+    {% if event.dateStart|date("Y-m-d") == "now"|date("Y-m-d") %}
+        Aujourd'hui, le
+    {% elseif event.dateStart|date("Y-m-d") == "tomorrow"|date("Y-m-d") %}
+        Demain, le
+    {% else %}
+        Le
+    {% endif %}
+    {{ week[event.dateStart|date("w")] }}
+    {{ event.dateStart|date('d') }}
+    {{ month[event.dateStart|date('n')] }}
+    {{ event.dateStart|date('Y') }}
+{% elseif event.dateStart|date('n') == event.dateEnd|date('n') %}
+    Du
+    {{ week[event.dateStart|date("w")] }}
+    {{ event.dateStart|date('d') }}
+    au
+    {{ week[event.dateEnd|date("w")] }}
+    {{ event.dateEnd|date('d') }}
+    {{ month[event.dateEnd|date('n')] }}
+    {{ event.dateEnd|date('Y') }}
+{% else %}
+    Du
+    {{ week[event.dateStart|date("w")] }}
+    {{ event.dateStart|date('d') }}
+    {{ month[event.dateStart|date('n')] }}
+    {{ event.dateStart|date('Y') }}
+    au
+    {{ week[event.dateEnd|date("w")] }}
+    {{ event.dateEnd|date('d') }}
+    {{ month[event.dateEnd|date('n')] }}
+    {{ event.dateEnd|date('Y') }}
+{% endif %}
+
+{% if event.timeEnd %}
+    de
+    {% if event.timeStart|date('i') == '00' %}
+        {{ event.timeStart|date('H\\h') }} 
+    {% else %}
+        {{ event.timeStart|date('H\\hi') }} 
+    {% endif %}
+    à
+    {% if event.timeEnd|date('i') == '00' %}
+        {{ event.timeEnd|date('H\\h') }}
+    {% else %}
+        {{ event.timeEnd|date('H\\hi') }} 
+    {% endif %}
+{% elseif event.timeStart %}
+    à partir de
+    {% if event.timeStart|date('i') == '00' %}
+        {{ event.timeStart|date('H\\h') }} 
+    {% else %}
+        {{ event.timeStart|date('H\\hi') }} 
+    {% endif %}
+{% endif %}
