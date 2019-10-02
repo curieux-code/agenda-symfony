@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Place;
-use App\Entity\Placetype;
-// use App\Form\PlaceType;
+use App\Entity\Placekind;
+use App\Form\PlaceType;
 use App\Repository\PlaceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -24,12 +24,12 @@ class PlaceController extends AbstractController
     {
         $places = $repo->findAll();
 
-        $repoType = $this->getDoctrine()->getRepository(Placetype::class);
-        $placetypes = $repoType->findAll();
+        $repoType = $this->getDoctrine()->getRepository(Placekind::class);
+        $placekinds = $repoType->findAll();
 
         return $this->render('place/index.html.twig', [
             'places' => $places,
-            'placetypes' => $placetypes
+            'placekinds' => $placekinds
         ]);
     }
 
@@ -53,7 +53,7 @@ class PlaceController extends AbstractController
     /**
      * Créer un lieu
      * 
-     * @Route("/agenda/new-place", name="place_create")
+     * @Route("/ajouter-un-lieu", name="place_create")
      * @return Response
      */
     public function create(Request $request, ObjectManager $manager){

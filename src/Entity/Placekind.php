@@ -7,11 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlacetypeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PlacekindRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Placetype
+class Placekind
 {
     /**
      * @ORM\Id()
@@ -36,7 +37,7 @@ class Placetype
     private $plural;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Place", inversedBy="placetypes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Place", inversedBy="placekinds")
      */
     private $place;
 

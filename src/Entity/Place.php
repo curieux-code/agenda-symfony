@@ -115,14 +115,14 @@ class Place
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Placetype", mappedBy="place")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Placekind", mappedBy="place")
      */
-    private $placetypes;
+    private $placekinds;
 
     public function __construct()
     {
         $this->events = new ArrayCollection();
-        $this->placetypes = new ArrayCollection();
+        $this->placekinds = new ArrayCollection();
     }
 
     /**
@@ -359,28 +359,28 @@ class Place
     }
 
     /**
-     * @return Collection|Placetype[]
+     * @return Collection|Placekind[]
      */
-    public function getPlacetypes(): Collection
+    public function getPlacekinds(): Collection
     {
-        return $this->placetypes;
+        return $this->placekinds;
     }
 
-    public function addPlacetype(Placetype $placetype): self
+    public function addPlacekind(Placekind $placekind): self
     {
-        if (!$this->placetypes->contains($placetype)) {
-            $this->placetypes[] = $placetype;
-            $placetype->addPlace($this);
+        if (!$this->placekinds->contains($placekind)) {
+            $this->placekinds[] = $placekind;
+            $placekind->addPlace($this);
         }
 
         return $this;
     }
 
-    public function removePlacetype(Placetype $placetype): self
+    public function removePlacekind(Placekind $placekind): self
     {
-        if ($this->placetypes->contains($placetype)) {
-            $this->placetypes->removeElement($placetype);
-            $placetype->removePlace($this);
+        if ($this->placekinds->contains($placekind)) {
+            $this->placekinds->removeElement($placekind);
+            $placekind->removePlace($this);
         }
 
         return $this;

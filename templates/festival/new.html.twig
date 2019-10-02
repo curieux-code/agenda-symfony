@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un festival{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="my-4">Ajouter un festival</h1>
+
+        {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <button type="submit" class="btn btn-primary">Créer un nouveau festival</button>
+
+        {{ form_end(form) }}
+            
+    </div>
+    
+{% endblock %}

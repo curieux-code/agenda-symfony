@@ -21,7 +21,7 @@ use App\Entity\Category;
 use App\Entity\District;
 use App\Entity\Festival;
 use App\Entity\Postcode;
-use App\Entity\Placetype;
+use App\Entity\Placekind;
 use App\Entity\Reduction;
 use App\Entity\Ticketing;
 use App\Entity\Department;
@@ -341,20 +341,20 @@ class AppFixtures extends Fixture
             'Manifestation' => 'Les manifestations citoyennes',
             'Equipement sportif' => 'Les équipements sportifs'
         ];
-        $placetypes = [];
+        $placekinds = [];
 
         foreach ($types as $k => $v) {
 
             $name = $k;
             $plural = $v;
 
-            $placetype = new Placetype();
+            $placekind = new Placekind();
 
-            $placetype  ->setName($name)
+            $placekind  ->setName($name)
                         ->setPlural($plural);
 
-            $manager->persist($placetype);
-            $placetypes[] = $placetype;
+            $manager->persist($placekind);
+            $placekinds[] = $placekind;
         }
 
         // Lieux
@@ -422,8 +422,8 @@ class AppFixtures extends Fixture
 
             // Types d'un lieu
             for ($j = 1; $j <= mt_rand(0,3); $j++){
-                $placetype = $placetypes[mt_rand(0, count($placetypes) - 1)];
-                $place  ->addPlacetype($placetype);
+                $placekind = $placekinds[mt_rand(0, count($placekinds) - 1)];
+                $place  ->addPlacekind($placekind);
                 
                 $manager->persist($place);
             }

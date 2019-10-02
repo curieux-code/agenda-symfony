@@ -8,6 +8,7 @@
         "api-platform/api-pack": "^1.2",
         "cocur/slugify": "^3.2",
         "fzaninotto/faker": "^1.8",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "pugx/autocompleter-bundle": "^1.4",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",

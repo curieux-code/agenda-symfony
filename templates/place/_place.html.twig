@@ -6,7 +6,7 @@
         <div class="block-visual">
 
             <div class="block-badge">
-                {% for type in place.placetypes %}
+                {% for type in place.placekinds %}
                     <a href="#">{{ type.name | badge({'color':'danger'}) }}</a> 
                 {% endfor %}
             </div>

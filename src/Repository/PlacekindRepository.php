@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Placetype;
+use App\Entity\Placekind;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Placetype|null find($id, $lockMode = null, $lockVersion = null)
- * @method Placetype|null findOneBy(array $criteria, array $orderBy = null)
- * @method Placetype[]    findAll()
- * @method Placetype[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Placekind|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Placekind|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Placekind[]    findAll()
+ * @method Placekind[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlacetypeRepository extends ServiceEntityRepository
+class PlacekindRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Placetype::class);
+        parent::__construct($registry, Placekind::class);
     }
 
     // /**
-    //  * @return Placetype[] Returns an array of Placetype objects
+    //  * @return Placekind[] Returns an array of Placekind objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PlacetypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Placetype
+    public function findOneBySomeField($value): ?Placekind
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

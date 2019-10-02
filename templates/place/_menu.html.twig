@@ -8,10 +8,10 @@
             <a href="#"><i class="fa fa-globe fa-lg"></i> Les types de lieu <span class="arrow"></span></a>
         </li>
         <ul class="sub-menu collapse show" id="service">
-            {% for placetype in placetypes %}
-                <li><a href="{{ path('search_by_placetype', {'slug': placetype.slug}) }}">
-                    {{ placetype.name }}
-                    <span class="badge">{{ placetype.place | length }}</span>
+            {% for placekind in placekinds %}
+                <li><a href="{{ path('search_by_placekind', {'slug': placekind.slug}) }}">
+                    {{ placekind.name }}
+                    <span class="badge">{{ placekind.place | length }}</span>
                 </a></li>
             {% endfor %}
         </ul>
